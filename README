@@ -1,0 +1,20 @@
+Usage is very simple. This object has two distinct types of generation called circle hill and limited random. Using default settings, a two dimensional height map can be constructed like so:
+
+var terrainGenerator = new GMTerrain();
+var map = terrainGenerator.generate(GMTerrain.TYPE_CIRCLEHILL);
+
+The following settings may be changed to allow for variations of each generation technique:
+
+// settings for both types
+width = 40;				// width of array
+height = 40;			// depth of array
+minimumHeight = 50;		// minimum value
+maximumHeight = 500;	// maximum value
+
+// specific to limited random
+this.lr_maximumHeightIncrease = 60;	// the maximum difference between adjacent nodes in the map
+
+// specific to circle hill
+this.ch_numCircles = 15;			// the number of hills
+this.ch_circleRadius = 20;			// the radius of the hills
+this.ch_circleHeightIncrease = 80;	// the maximum height of the hills
