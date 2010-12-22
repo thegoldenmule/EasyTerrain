@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<meta charset="utf-8" />
+        <title>EasyTerrain Demo</title>
+		
+		<script src="GMTerrain.js"></script>
+    </head>
+    <body>
+        <canvas id=drawingCanvas></canvas>
+		
+		<script>
+			window.addEventListener("load", function(){
+				// configure canvas
+				var canvas = document.getElementById("drawingCanvas");
+				canvas.width = window.screen.width;
+				canvas.height = 500
+				var context = canvas.getContext("2d");
+				
+				// configure terrain + generate
+				var cellWidth = 10;
+				var terrainGenerator = new GMTerrain();
+				terrainGenerator.width = canvas.width / cellWidth;
+				var map = terrainGenerator.generate(GMTerrain.TYPE_CIRCLEHILL);
+				
+				// grab width + height
+				var width = map.getWidth();
+				var height = map.getHeight();
+				
+				// take a random cross section
+				var randomIndex = Math.floor(Math.random() * height);
+				
+				// draw
+				context.strokeStyle = "#FF0000";
+				context.beginPath();
+				context.moveTo(0, map.get(0, randomIndex));
+				
+				for (var i = 1; i < width - 1; i++) {
+					context.lineTo(i * cellWidth, map.get(i, randomIndex));
+				}
+				
+				context.stroke();
+			}, "false");
+		</script>
+    </body>
+</html>
