@@ -2,26 +2,46 @@
 <html lang="en">
     <head>
     	<meta charset="utf-8" />
-        <title>EasyTerrain Demo</title>
+        <title>GMTerrain Demo</title>
 		
 		<script src="GMTerrain.js"></script>
     </head>
     <body>
         <canvas id=drawingCanvas></canvas>
+        Circle Hill:<input type=radio name=generationType id=ch checked=true></input>
+    	Limited Random:<input type=radio name=generationType></input>
+    	<input type=button value=Generate! onclick=generate()></input>
 		
 		<script>
+			// you should always use global variables, kids!
+			var canvas,
+				context,
+				ch,
+				cellWidth,
+				terrainGenerator,
+				generationType = GMTerrain.TYPE_CIRCLEHILL;
+			
 			window.addEventListener("load", function(){
 				// configure canvas
-				var canvas = document.getElementById("drawingCanvas");
+				canvas = document.getElementById("drawingCanvas");
 				canvas.width = window.screen.width;
-				canvas.height = 500
-				var context = canvas.getContext("2d");
+				canvas.height = 500;
+				context = canvas.getContext("2d");
 				
 				// configure terrain + generate
-				var cellWidth = 10;
-				var terrainGenerator = new GMTerrain();
+				cellWidth = 10;
+				terrainGenerator = new GMTerrain();
 				terrainGenerator.width = canvas.width / cellWidth;
-				var map = terrainGenerator.generate(GMTerrain.TYPE_CIRCLEHILL);
+				
+				ch = document.getElementById("ch");
+				
+				generate();
+			}, "false");
+			
+			function generate() {
+				canvas.width = canvas.width;
+				
+				var map = terrainGenerator.generate(ch.checked ? GMTerrain.TYPE_CIRCLEHILL : GMTerrain.TYPE_LIMITEDRANDOM);
 				
 				// grab width + height
 				var width = map.getWidth();
@@ -40,7 +60,7 @@
 				}
 				
 				context.stroke();
-			}, "false");
+			}
 		</script>
     </body>
 </html>

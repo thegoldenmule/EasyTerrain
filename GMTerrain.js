@@ -33,18 +33,18 @@ GMTerrain = function() {
 	var _that = this;
 	
 	// both generation types
-	this.minimumHeight = 50;
-	this.maximumHeight = 500;
-	this.width = 40;
-	this.height = 40;
+	_that.minimumHeight = 50;
+	_that.maximumHeight = 500;
+	_that.width = 40;
+	_that.height = 40;
 	
 	// limited random specific
-	this.lr_maximumHeightIncrease = 60;
+	_that.lr_maximumHeightIncrease = 60;
 	
 	// circle hill specific
-	this.ch_numCircles = 15;
-	this.ch_circleRadius = 20;
-	this.ch_circleHeightIncrease = 80;
+	_that.ch_numCircles = 15;
+	_that.ch_circleRadius = 20;
+	_that.ch_circleHeightIncrease = 80;
 	
 	function generateLimitedRandom() {
 		var heightMap = new Array2(_that.width, _that.height);
@@ -95,7 +95,7 @@ GMTerrain = function() {
 		return heightMap;
 	};
 	
-	this.generate = function(mode) {
+	_that.generate = function(mode) {
 		if (mode == GMTerrain.TYPE_CIRCLEHILL) {
 			return generateCircleHill();
 		} else if (mode == GMTerrain.TYPE_LIMITEDRANDOM) {
@@ -104,6 +104,8 @@ GMTerrain = function() {
 			throw new Error("Invalid generation mode.");
 		}
 	};
+	
+	return _that;
 };
 
 GMTerrain.TYPE_CIRCLEHILL = "circleHill";
